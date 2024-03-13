@@ -613,7 +613,7 @@ void CSolidCalculatorDlg::CheckCalculation()
 		nOperatorIndex = m_StrResultDisplay.Find(_T('/'));
 		OperationType = 4;
 	}
-	//13032024
+	//
 	if (m_StrResultDisplay.Right(1) == _T("+") ||
 		m_StrResultDisplay.Right(1) == _T("-") ||
 		m_StrResultDisplay.Right(1) == _T("*") ||
