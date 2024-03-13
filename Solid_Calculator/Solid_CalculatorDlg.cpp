@@ -613,6 +613,15 @@ void CSolidCalculatorDlg::CheckCalculation()
 		nOperatorIndex = m_StrResultDisplay.Find(_T('/'));
 		OperationType = 4;
 	}
+	//13032024
+	if (m_StrResultDisplay.Right(1) == _T("+") ||
+		m_StrResultDisplay.Right(1) == _T("-") ||
+		m_StrResultDisplay.Right(1) == _T("*") ||
+		m_StrResultDisplay.Right(1) == _T("/"))
+	{
+		m_StrResultDisplay.Delete(m_StrResultDisplay.GetLength() - 1);
+		return;
+	}
 
 	double dbResult = 0.0;
 
@@ -658,7 +667,10 @@ double CSolidCalculatorDlg::Addition(double dbVal1, double dbVal2)
 	typedef double (*LPADDITION)(double, double);
 	LPADDITION pFunADD;
 	pFunADD = (LPADDITION)GetProcAddress(hdll, "Addition");
-	dbResult = pFunADD(dbVal1, dbVal2);
+	if (pFunADD != NULL)	//13032024
+	{
+		dbResult = pFunADD(dbVal1, dbVal2);
+	}
 
 	return dbResult;
 }
@@ -670,8 +682,10 @@ double CSolidCalculatorDlg::SubStract(double dbVal1, double dbVal2)
 	typedef double (*LPADDITION)(double, double);
 	LPADDITION pFunADD;
 	pFunADD = (LPADDITION)GetProcAddress(hdll, "Subtraction");
-	dbResult = pFunADD(dbVal1, dbVal2);
-
+	if (pFunADD != NULL)	//13032024
+	{
+		dbResult = pFunADD(dbVal1, dbVal2);
+	}
 	return dbResult;
 }
 
@@ -682,7 +696,10 @@ double CSolidCalculatorDlg::Multiply(double dbVal1, double dbVal2)
 	typedef double (*LPADDITION)(double, double);
 	LPADDITION pFunADD;
 	pFunADD = (LPADDITION)GetProcAddress(hdll, "Multiply");
-	dbResult = pFunADD(dbVal1, dbVal2);
+	if (pFunADD != NULL)	//13032024
+	{
+		dbResult = pFunADD(dbVal1, dbVal2);
+	}
 
 	return dbResult;
 }
@@ -699,7 +716,10 @@ double CSolidCalculatorDlg::Division(double dbVal1, double dbVal2)
 		typedef double (*LPADDITION)(double, double);
 		LPADDITION pFunADD;
 		pFunADD = (LPADDITION)GetProcAddress(hdll, "Divide");
-		dbResult = pFunADD(dbVal1, dbVal2);
+		if (pFunADD != NULL)	//13032024
+		{
+			dbResult = pFunADD(dbVal1, dbVal2);
+		}
 
 		return dbResult;
 	}
